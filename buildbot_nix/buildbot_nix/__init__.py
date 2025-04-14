@@ -27,7 +27,6 @@ from buildbot.util.twisted import async_to_deferred
 from buildbot.www.authz import Authz
 from buildbot.www.authz.endpointmatchers import EndpointMatcherBase, Match
 
-from buildbot_nix.pull_based.backend import PullBasedBacked
 
 if TYPE_CHECKING:
     from buildbot.process.log import StreamLog
@@ -43,6 +42,7 @@ from .gitea_projects import GiteaBackend
 from .github_projects import (
     GithubBackend,
 )
+from .gitlab_project import GitlabBackend
 from .models import (
     AuthBackendConfig,
     BuildbotNixConfig,
@@ -1469,6 +1469,9 @@ class NixConfigurator(ConfiguratorBase):
 
         if self.config.gitea is not None:
             backends["gitea"] = GiteaBackend(self.config.gitea, self.config.url)
+
+        if self.config.gitlab is not None:
+            backends["gitlab"] = GitlabBackend(self.config.gitlab, self.config.url)
 
         if self.config.pull_based is not None:
             backends["pull_based"] = PullBasedBacked(self.config.pull_based)
