@@ -27,6 +27,8 @@ from buildbot.util.twisted import async_to_deferred
 from buildbot.www.authz import Authz
 from buildbot.www.authz.endpointmatchers import EndpointMatcherBase, Match
 
+from buildbot_nix.pull_based.backend import PullBasedBacked
+
 
 if TYPE_CHECKING:
     from buildbot.process.log import StreamLog
